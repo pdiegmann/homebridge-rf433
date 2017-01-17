@@ -1,5 +1,6 @@
 var Service, Characteristic;
 var pjson = require('./package.json');
+var exec = require('child_process').exec;
 
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
