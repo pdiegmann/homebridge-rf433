@@ -17,6 +17,7 @@
     "url": "git+https://github.com/pdiegmann/homebridge-rf433.git"
   },
   "keywords": [
+    "homebridge-plugin",
     "homebridge",
     "rf",
     "433",
