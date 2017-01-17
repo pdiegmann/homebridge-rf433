@@ -26,7 +26,7 @@ function RF433Accessory(log, config) {
 }
 
 RF433Accessory.prototype.callCmdAsPromise = function(powerState, callback) {
-  exec([path.join(__dirname, "node_modules/"),
+  exec([path.join(__dirname, "xkonni-raspberry-remote*/send"),
     "--pin", this.pin,
     this.systemCode,
     this.unitCode,
