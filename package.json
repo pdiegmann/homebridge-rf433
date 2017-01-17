@@ -4,11 +4,14 @@
   "description": "Homebridge Plugin for RF 433 MHz Outlets",
   "main": "index.js",
   "scripts": {
-    "install": "cd ./raspberry-remote && make all"
+      "preinstall": "curl -L https://github.com/xkonni/raspberry-remote/tarball/master/8a5b705 -o raspberry-remote.tar",
+      "install": "tar -xvf raspberry-remote.tar && cd xkonni-raspberry-remote* && make send"
   },
   "engines": {
     "node": "^6.0.0",
     "homebridge": "^0.4.0"
+  },
+  "dependencies": {
   },
   "repository": {
     "type": "git",
