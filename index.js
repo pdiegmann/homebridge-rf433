@@ -65,7 +65,7 @@ RF433Accessory.prototype.getServices = function () {
     var services = [];
 
     this.informationService = new Service.AccessoryInformation();
-    informationService
+    this.informationService
       .setCharacteristic(Characteristic.Name, this.name)
       .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
       .setCharacteristic(Characteristic.Version, this.version);
