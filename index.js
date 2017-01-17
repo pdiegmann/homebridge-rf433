@@ -27,7 +27,7 @@ function RF433Accessory(log, config) {
 
 RF433Accessory.prototype.callCmdAsPromise = function(powerState, callback) {
   exec([path.join(__dirname, "node_modules/"),
-    "--pin", options.pin,
+    "--pin", this.pin,
     this.systemCode,
     this.unitCode
     (powerState ? '1' : '0')
