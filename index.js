@@ -13,7 +13,7 @@ function RF433Accessory(log, config) {
   this.name = config.name || "RF 433 MHz";
   this.manufacturer = config.manufacturer || "N/A";
   this.version = config.version || pjson.version;
-  this.serviceType = config.serviceType || "StatelessProgrammableSwitch";
+  this.serviceType = config.serviceType || "Switch";
   this.pin = config.pin || 0;
   this.systemCode = config.systemCode || "11111";
   this.unitCode = config.unitCode || "1";
