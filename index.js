@@ -37,17 +37,17 @@ RF433Accessory.prototype.callCmdAsPromise = function(powerState, callback) {
 
     callback(error, stdout);
   }.bind(this));
-}
+};
 
 RF433Accessory.prototype.switchOn = function(callback) {
   this.powerState = true;
   this.callCmdAsPromise(true, callback);
-}
+};
 
 RF433Accessory.prototype.switchOff = function(callback) {
   this.powerState = false;
   this.callCmdAsPromise(false, callback);
-}
+};
 
 RF433Accessory.prototype.setPowerState = function(powerState, callback) {
   if (powerState) {
@@ -55,10 +55,11 @@ RF433Accessory.prototype.setPowerState = function(powerState, callback) {
   } else {
     this.switchOff(callback);
   }
-}
+};
+
 RF433Accessory.prototype.getPowerState = function(callback) {
   callback(this.powerState);
-});
+};
 
 RF433Accessory.prototype.getServices = function () {
     var services = [];
