@@ -26,6 +26,8 @@ function RF433Accessory(log, config) {
 }
 
 RF433Accessory.prototype.callCmdAsPromise = function(powerState, callback) {
+  this.log("setting " + this.systemCode + "." + this.unitCode + " on " + this.pin + " " + (powerState ? "on" : "off"));
+
   exec([path.join(__dirname, "xkonni-raspberry-remote*/send"),
     "--pin", this.pin,
     this.systemCode,
@@ -73,13 +75,13 @@ RF433Accessory.prototype.getServices = function () {
       .setCharacteristic(Characteristic.SoftwareRevision, this.version);
     services.push(this.informationService);
 
-    if (this.serviceType == "Lightbulb" || this.serviceType == "lightbulb") {
+    if (this.serviceType == "Lightbulb" || this.serviceType == "lightbulb" || this.serviceType == "Light" || this.serviceType == "light") {
       this.switchService = new Service.Lightbulb(this.name);
       this.switchService.getCharacteristic(Characteristic.On)
         .on('set', this.setPowerState.bind(this))
         .on('get', this.getPowerState.bind(this))
       services.push(this.switchService);
-    } else if (this.serviceType == "Switch" || this.serviceType == "switch") {
+    } else if (this.serviceType == "StatelessSwitch" || this.serviceType == "statelessswitch" || this.serviceType == "StatelessProgrammableSwitch" || this.serviceType == "statelessprogrammableswitch") {
       this.switchService = new Service.Switch(this.name);
       this.switchService.getCharacteristic(Characteristic.On)
         .on('set', this.setPowerState.bind(this))
