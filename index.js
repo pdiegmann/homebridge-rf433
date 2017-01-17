@@ -28,7 +28,7 @@ RF433Accessory.prototype.callCmdAsPromise = function(powerState, callback) {
     "--pin", options.pin,
     this.systemCode,
     this.unitCode
-    (powerState ? '1', '0')
+    (powerState ? '1' : '0')
   ].join(' '), function (error, stdout, stderr) {
     error = error || stderr;
     if(error) {
