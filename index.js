@@ -68,7 +68,7 @@ RF433Accessory.prototype.getServices = function () {
     this.informationService
       .setCharacteristic(Characteristic.Name, this.name)
       .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
-      .setCharacteristic(Characteristic.Version, this.version);
+      .setCharacteristic(Characteristic.SoftwareRevision, this.version);
     services.push(this.informationService);
 
     if (this.serviceType == "Lightbulb" || this.serviceType == "lightbulb") {
