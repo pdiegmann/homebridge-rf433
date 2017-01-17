@@ -1,0 +1,33 @@
+{
+  "name": "homebridge-rf433",
+  "version": "0.0.1",
+  "description": "Homebridge Plugin for RF 433 MHz Outlets",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd ./raspberry-remote && make all"
+  },
+  "engines": {
+    "node": "^6.0.0",
+    "homebridge": "^0.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdiegmann/homebridge-rf433.git"
+  },
+  "keywords": [
+    "homebridge",
+    "rf",
+    "433",
+    "mhz",
+    "433mhz",
+    "outlet",
+    "switch",
+    "light"
+  ],
+  "author": "pdiegmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pdiegmann/homebridge-rf433/issues"
+  },
+  "homepage": "https://github.com/pdiegmann/homebridge-rf433#readme"
+}
