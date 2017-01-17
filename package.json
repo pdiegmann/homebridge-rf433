@@ -1,6 +1,6 @@
 {
   "name": "homebridge-rf433",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Homebridge Plugin for RF 433 MHz Outlets",
   "main": "index.js",
   "scripts": {
