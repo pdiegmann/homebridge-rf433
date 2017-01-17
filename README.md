@@ -13,7 +13,7 @@ Control RF outlets with HomeKit / Siri
 # Configuration
 
 See `sample-config.json`:
-`
+```json
 {
   "accessory": "RF433",
   "name": "Reading Light",
@@ -21,5 +21,4 @@ See `sample-config.json`:
   "unitCode": 3,
   "serviceType": "Lightbulb"
 }
-
-`
+```
