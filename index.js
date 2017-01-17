@@ -29,7 +29,7 @@ RF433Accessory.prototype.callCmdAsPromise = function(powerState, callback) {
   exec([path.join(__dirname, "node_modules/"),
     "--pin", this.pin,
     this.systemCode,
-    this.unitCode
+    this.unitCode,
     (powerState ? '1' : '0')
   ].join(' '), function (error, stdout, stderr) {
     error = error || stderr;
