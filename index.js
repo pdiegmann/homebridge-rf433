@@ -73,25 +73,25 @@ RF433Accessory.prototype.getServices = function () {
 
     if (this.serviceType == "Lightbulb" || this.serviceType == "lightbulb") {
       this.switchService = new Service.Lightbulb(this.name);
-      switchService.getCharacteristic(Characteristic.On)
+      this.switchService.getCharacteristic(Characteristic.On)
         .on('set', this.setPowerState.bind(this))
         .on('get', this.getPowerState.bind(this))
       services.push(this.switchService);
     } else if (this.serviceType == "Switch" || this.serviceType == "switch") {
       this.switchService = new Service.Switch(this.name);
-      switchService.getCharacteristic(Characteristic.On)
+      this.switchService.getCharacteristic(Characteristic.On)
         .on('set', this.setPowerState.bind(this))
         .on('get', this.getPowerState.bind(this))
       services.push(this.switchService);
     } else if (this.serviceType == "Fan" || this.serviceType == "fan") {
       this.switchService = new Service.Fan(this.name);
-      switchService.getCharacteristic(Characteristic.On)
+      this.switchService.getCharacteristic(Characteristic.On)
         .on('set', this.setPowerState.bind(this))
         .on('get', this.getPowerState.bind(this))
       services.push(this.switchService);
     } else {
       this.switchService = new Service.StatelessProgrammableSwitch(this.name);
-      switchService.getCharacteristic(Characteristic.ProgrammableSwitchEvent)
+      this.switchService.getCharacteristic(Characteristic.ProgrammableSwitchEvent)
         .on('set', this.setPowerState.bind(this));
       services.push(this.switchService);
     }
