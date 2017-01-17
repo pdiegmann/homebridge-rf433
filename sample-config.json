@@ -1,0 +1,19 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "CC:22:3D:E3:CE:51",
+        "port": 51826,
+        "pin": "031-45-154"
+    },
+    "description": "This is an example configuration file for homebridge rf 433 plugin",
+    "hint": "Always paste into jsonlint.com validation page before starting your homebridge, saves a lot of frustration",
+    "accessories": [
+      {
+        "accessory": "RF433",
+        "name": "Reading Light",
+        "systemCode": "11011",
+        "unitCode": 3,
+        "serviceType": "Lightbulb"
+      }
+    ]
+}
