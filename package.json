@@ -11,7 +11,10 @@
     "node": "^6.0.0",
     "homebridge": "^0.4.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "async": "^2.1.4",
+    "request": "^2.79.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pdiegmann/homebridge-rf433.git"

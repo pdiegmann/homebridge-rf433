@@ -1,6 +1,7 @@
 var Service, Characteristic;
 var pjson = require('./package.json');
-var exec = require('child_process').exec;
+var config = require('./sample-config.json');
+var request = require('request');
 var path = require('path');
 
 module.exports = function (homebridge) {
@@ -20,37 +21,60 @@ function RF433Accessory(log, config) {
   this.systemCode = config.systemCode || "11111";
   this.unitCode = config.unitCode || "1";
 
+  this.gpioServer = config.gpioServer || { protocol: "http", host: "127.0.0.1", port: 8672 }
+
   this.powerState = false;
 
-  return this;
-}
+  var exec = require('child_process').exec;
+  var path = require('path');
 
-RF433Accessory.prototype.callCmdAsPromise = function(powerState, callback) {
-  this.log("setting " + this.systemCode + "." + this.unitCode + " on " + this.pin + " " + (powerState ? "on" : "off"));
-
-  exec([path.join(__dirname, "xkonni-raspberry-remote*/send"),
-    "--pin", this.pin,
-    this.systemCode,
-    this.unitCode,
-    (powerState ? '1' : '0')
-  ].join(' '), function (error, stdout, stderr) {
+  var execPath = path.join(__dirname, "GPIOServer.js");
+  exec(["node", execPath, "port=" + this.gpioServer.port].join(' '), function (error, stdout, stderr) {
     error = error || stderr;
     if(error) {
       this.log("Something went wrong: " + error);
     }
+  }.bind(this));
 
-    callback(error, stdout);
+  return this;
+}
+
+RF433Accessory.prototype.callCmdViaServer = function(powerState, callback) {
+  this.log("setting " + this.systemCode + "." + this.unitCode + " on " + this.pin + " to " + (powerState ? "on" : "off"));
+
+  var url = this.gpioServer.protocol + "://" + this.gpioServer.host + ":" + this.gpioServer.port;
+
+  request({
+    url,
+    qs: {
+        "execPath": path.join(__dirname, "xkonni-raspberry-remote*/send"),
+        "pin": this.pin,
+        "systemCode": this.systemCode,
+        "unitCode": this.unitCode,
+        "powerState": this.powerState
+      }
+    },
+    function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(error, true);
+      } else {
+        if(error) {
+          this.log("Something went wrong: " + error);
+        }
+
+        callback(null, true);
+      }
   }.bind(this));
 };
 
 RF433Accessory.prototype.switchOn = function(callback) {
   this.powerState = true;
-  this.callCmdAsPromise(true, callback);
+  this.callCmdViaServer(true, callback);
 };
 
 RF433Accessory.prototype.switchOff = function(callback) {
   this.powerState = false;
-  this.callCmdAsPromise(false, callback);
+  this.callCmdViaServer(false, callback);
 };
 
 RF433Accessory.prototype.setPowerState = function(powerState, callback) {
@@ -102,3 +126,9 @@ RF433Accessory.prototype.getServices = function () {
 
     return services;
 };
+
+var self = new RF433Accessory(console.log, config);
+self.switchOn(function(err, data) {
+  console.log(err);
+  console.log(data);
+})
