@@ -62,7 +62,7 @@ RF433Accessory.prototype.setPowerState = function(powerState, callback) {
 };
 
 RF433Accessory.prototype.getPowerState = function(callback) {
-  callback(this.powerState);
+  callback(null, this.powerState);
 };
 
 RF433Accessory.prototype.getServices = function () {
