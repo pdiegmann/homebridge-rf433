@@ -21,7 +21,7 @@ const requestQueue = asyncQueue(function(task, callback) {
   var pin = queryObject.pin;
   var systemCode = queryObject.systemCode;
   var unitCode = queryObject.unitCode;
-  var powerState = queryObject.powerState;
+  var powerState = queryObject.powerState == "true";
 
   exec([execPath,
     "--pin", pin,

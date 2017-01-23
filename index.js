@@ -43,7 +43,7 @@ RF433Accessory.prototype.callCmdViaServer = function(powerState, callback) {
   this.log("setting " + this.systemCode + "." + this.unitCode + " on " + this.pin + " to " + (powerState ? "on" : "off"));
 
   var url = this.gpioServer.protocol + "://" + this.gpioServer.host + ":" + this.gpioServer.port;
-
+request.debug = true;
   request({
     url,
     qs: {
@@ -126,9 +126,3 @@ RF433Accessory.prototype.getServices = function () {
 
     return services;
 };
-
-var self = new RF433Accessory(console.log, config);
-self.switchOn(function(err, data) {
-  console.log(err);
-  console.log(data);
-})
