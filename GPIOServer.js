@@ -29,6 +29,7 @@ const requestQueue = asyncQueue(function(task, callback) {
     unitCode,
     (powerState ? '1' : '0')
   ].join(' '), function (error, stdout, stderr) {
+    callback();
     error = error || stderr;
     if(error) {
       response.statusCode = 500;
@@ -37,7 +38,6 @@ const requestQueue = asyncQueue(function(task, callback) {
       response.end();
     }
   });
-  callback();
 });
 
 const http = require('http')
