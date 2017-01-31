@@ -31,7 +31,7 @@ function RF433Accessory(log, config) {
   var execPath = path.join(__dirname, "GPIOServer.js");
   exec(["node", execPath, "port=" + this.gpioServer.port].join(' '), function (error, stdout, stderr) {
     error = error || stderr;
-    if(error) {
+    if(error && (error + "").indexOf("EADDRINUSE") < 0) {
       this.log("Something went wrong: " + error);
     }
   }.bind(this));

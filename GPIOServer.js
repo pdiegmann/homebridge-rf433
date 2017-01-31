@@ -29,14 +29,16 @@ const requestQueue = asyncQueue(function(task, callback) {
     unitCode,
     (powerState ? '1' : '0')
   ].join(' '), function (error, stdout, stderr) {
-    callback();
-    error = error || stderr;
-    if(error) {
-      response.statusCode = 500;
-      response.end("Something went wrong 3: " + error);
-    } else {
-      response.end();
-    }
+    setTimeout(function() {
+      callback();
+      error = error || stderr;
+      if(error) {
+        response.statusCode = 500;
+        response.end("Something went wrong 3: " + error);
+      } else {
+        response.end();
+      }
+    }, 250);
   });
 });
 
