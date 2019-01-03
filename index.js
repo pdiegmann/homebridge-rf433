@@ -21,7 +21,7 @@ function RF433Accessory(log, config) {
   this.systemCode = config.systemCode || "11111";
   this.unitCode = config.unitCode || "1";
 
-  this.gpioServer = config.gpioServer || { protocol: "http", host: "127.0.0.1", port: 8672 }
+  this.gpioServer = config.gpioServer || { protocol: "http", host: "localhost", port: 8672 }
 
   this.powerState = false;
 
