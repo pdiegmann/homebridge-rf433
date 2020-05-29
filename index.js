@@ -28,6 +28,11 @@ function RF433Accessory(log, config) {
   var exec = require('child_process').exec;
   var path = require('path');
 
+  /**
+  
+  IMPORTANT:    Due to ristrictions of different docker images and my inherent laziness, I outsourced the GPIO server
+                to a dedicated (docker) image.
+  
   var execPath = path.join(__dirname, "GPIOServer.js");
   exec(["node", execPath, "port=" + this.gpioServer.port].join(' '), function (error, stdout, stderr) {
     error = error || stderr;
@@ -35,6 +40,7 @@ function RF433Accessory(log, config) {
       this.log("Something went wrong: " + error);
     }
   }.bind(this));
+  **/
 
   return this;
 }
