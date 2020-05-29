@@ -8,7 +8,7 @@ module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
 
-    homebridge.registerAccessory('homebridge-rf433', 'RF433', RF433Accessory);
+    homebridge.registerAccessory('homebridge-rf433-without-server', 'RF433', RF433Accessory);
 };
 
 function RF433Accessory(log, config) {
