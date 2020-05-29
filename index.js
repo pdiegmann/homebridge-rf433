@@ -12,6 +12,9 @@ module.exports = function (homebridge) {
 };
 
 function RF433Accessory(log, config) {
+  var exec = require('child_process').exec;
+  var path = require('path');
+    
   this.log = log;
   this.name = config.name || "RF 433 MHz";
   this.manufacturer = config.manufacturer || "N/A";
@@ -26,9 +29,6 @@ function RF433Accessory(log, config) {
   this.gpioServer = config.gpioServer || { protocol: "http", host: "localhost", port: 8672 }
 
   this.powerState = false;
-
-  var exec = require('child_process').exec;
-  var path = require('path');
 
   /**
   
