@@ -20,6 +20,7 @@ function RF433Accessory(log, config) {
   this.pin = config.pin || 0;
   this.systemCode = config.systemCode || "11111";
   this.unitCode = config.unitCode || "1";
+  this.execPath = config.execPath || path.join(__dirname, "xkonni-raspberry-remote*/send");
 
   this.gpioServer = config.gpioServer || { protocol: "http", host: "localhost", port: 8672 }
 
@@ -53,7 +54,7 @@ request.debug = true;
   request({
     url,
     qs: {
-        "execPath": path.join(__dirname, "xkonni-raspberry-remote*/send"),
+        "execPath": this.execPath,
         "pin": this.pin,
         "systemCode": this.systemCode,
         "unitCode": this.unitCode,
