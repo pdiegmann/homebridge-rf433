@@ -1,7 +1,7 @@
 {
   "name": "homebridge-rf433-without-server",
   "displayName": "RF433 Switch (without bundled GPIO-server)",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Homebridge Plugin for RF 433 MHz Outlets",
   "main": "index.js",
   "engines": {
