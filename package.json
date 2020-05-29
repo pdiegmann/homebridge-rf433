@@ -6,7 +6,7 @@
   "main": "index.js",
   "engines": {
     "node": ">=10.17.0",
-    "homebridge": ">0.4.53"
+    "homebridge": ">=1.0.0"
   },
   "dependencies": {
     "async": "^2.1.4",
