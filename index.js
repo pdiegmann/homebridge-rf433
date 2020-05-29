@@ -20,7 +20,8 @@ function RF433Accessory(log, config) {
   this.pin = config.pin || 0;
   this.systemCode = config.systemCode || "11111";
   this.unitCode = config.unitCode || "1";
-  this.execPath = config.execPath || path.join(__dirname, "xkonni-raspberry-remote*/send");
+  var fallbackPath = path.join(__dirname, "xkonni-raspberry-remote*/send");
+  this.execPath = config.execPath || fallbackPath;
 
   this.gpioServer = config.gpioServer || { protocol: "http", host: "localhost", port: 8672 }
 
