@@ -53,7 +53,8 @@ RF433Accessory.prototype.callCmdViaServer = function(powerState, callback) {
   var url = this.gpioServer.protocol + "://" + this.gpioServer.host + ":" + this.gpioServer.port;
 request.debug = true;
   request({
-    url,
+    url + "?execPath=" + this.execPath + "&pin=" + this.pin + "&systemCode=" + this.systemCode + "&unitCode=" + this.unitCode + "&powerState=" + this.powerState,
+    /**
     qs: {
         "execPath": this.execPath,
         "pin": this.pin,
@@ -62,6 +63,7 @@ request.debug = true;
         "powerState": this.powerState
       }
     },
+    **/
     function (error, response, body) {
       if (!error && response.statusCode == 200) {
         callback(error, true);
