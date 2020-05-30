@@ -3,6 +3,7 @@ var pjson = require('./package.json');
 var config = require('./sample-config.json');
 var request = require('request');
 var path = require('path');
+var querystring = require('querystring');
 
 module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
@@ -50,10 +51,11 @@ function RF433Accessory(log, config) {
 RF433Accessory.prototype.callCmdViaServer = function(powerState, callback) {
   this.log("setting " + this.systemCode + "." + this.unitCode + " on " + this.pin + " to " + (powerState ? "on" : "off"));
 
-  var url = this.gpioServer.protocol + "://" + this.gpioServer.host + ":" + this.gpioServer.port;
+  var url = this.gpioServer.protocol + "://" + this.gpioServer.host + ":" + this.gpioServer.port + "?execPath=" + querystring.escape(this.execPath) + "&pin=" + querystring.escape(this.pin) + "&systemCode=" + querystring.escape(this.systemCode) + "&unitCode=" + querystring.escape(this.unitCode) + "&powerState=" + querystring.escape(this.powerState);
+  this.log("url: " + url);
 request.debug = true;
   request({
-    url + "?execPath=" + this.execPath + "&pin=" + this.pin + "&systemCode=" + this.systemCode + "&unitCode=" + this.unitCode + "&powerState=" + this.powerState,
+    url,
     /**
     qs: {
         "execPath": this.execPath,
