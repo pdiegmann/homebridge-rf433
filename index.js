@@ -27,7 +27,7 @@ function RF433Accessory(log, config) {
   var fallbackPath = path.join("usr", "bin", "send");
   this.execPath = config.execPath || fallbackPath;
 
-  this.gpioServer = config.gpioServer || { protocol: "http", host: "localhost", port: 8672 }
+  this.gpioServer = config.gpioServer || { protocol: "http", host: "localhost", port: 8672 };
 
   this.powerState = false;
 
@@ -53,20 +53,10 @@ RF433Accessory.prototype.callCmdViaServer = function(powerState, callback) {
 
   var url = this.gpioServer.protocol + "://" + this.gpioServer.host + ":" + this.gpioServer.port + "?execPath=" + querystring.escape(this.execPath) + "&pin=" + querystring.escape(this.pin) + "&systemCode=" + querystring.escape(this.systemCode) + "&unitCode=" + querystring.escape(this.unitCode) + "&powerState=" + querystring.escape(this.powerState);
   this.log("url: " + url);
-request.debug = true;
+  request.debug = true;
   request({
-    url,
-    /**
-    qs: {
-        "execPath": this.execPath,
-        "pin": this.pin,
-        "systemCode": this.systemCode,
-        "unitCode": this.unitCode,
-        "powerState": this.powerState
-      }
-    },
-    **/
-    function (error, response, body) {
+    url: url,
+    callback: function (error, response, body) {
       if (!error && response.statusCode == 200) {
         callback(error, true);
       } else {
@@ -76,7 +66,8 @@ request.debug = true;
 
         callback(null, true);
       }
-  }.bind(this));
+    }
+  });
 };
 
 RF433Accessory.prototype.switchOn = function(callback) {
@@ -115,19 +106,19 @@ RF433Accessory.prototype.getServices = function () {
       this.switchService = new Service.Lightbulb(this.name);
       this.switchService.getCharacteristic(Characteristic.On)
         .on('set', this.setPowerState.bind(this))
-        .on('get', this.getPowerState.bind(this))
+        .on('get', this.getPowerState.bind(this));
       services.push(this.switchService);
     } else if (this.serviceType == "StatelessSwitch" || this.serviceType == "statelessswitch" || this.serviceType == "StatelessProgrammableSwitch" || this.serviceType == "statelessprogrammableswitch") {
       this.switchService = new Service.Switch(this.name);
       this.switchService.getCharacteristic(Characteristic.On)
         .on('set', this.setPowerState.bind(this))
-        .on('get', this.getPowerState.bind(this))
+        .on('get', this.getPowerState.bind(this));
       services.push(this.switchService);
     } else if (this.serviceType == "Fan" || this.serviceType == "fan") {
       this.switchService = new Service.Fan(this.name);
       this.switchService.getCharacteristic(Characteristic.On)
         .on('set', this.setPowerState.bind(this))
-        .on('get', this.getPowerState.bind(this))
+        .on('get', this.getPowerState.bind(this));
       services.push(this.switchService);
     } else {
       this.switchService = new Service.StatelessProgrammableSwitch(this.name);
@@ -138,3 +129,4 @@ RF433Accessory.prototype.getServices = function () {
 
     return services;
 };
+
