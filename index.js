@@ -51,10 +51,10 @@ function RF433Accessory(log, config) {
 }
 
 RF433Accessory.prototype.callCmdViaServer = function(powerState, callback) {
-  __log("setting " + this.systemCode + "." + this.unitCode + " on " + this.pin + " to " + (powerState ? "on" : "off"));
+  //__log("setting " + this.systemCode + "." + this.unitCode + " on " + this.pin + " to " + (powerState ? "on" : "off"));
 
   var url = this.gpioServer.protocol + "://" + this.gpioServer.host + ":" + this.gpioServer.port + "?execPath=" + querystring.escape(this.execPath) + "&pin=" + querystring.escape(this.pin) + "&systemCode=" + querystring.escape(this.systemCode) + "&unitCode=" + querystring.escape(this.unitCode) + "&powerState=" + querystring.escape(this.powerState);
-  __log("url: " + url);
+  //__log("url: " + url);
   request.debug = true;
   request({
     url: url,
@@ -63,7 +63,7 @@ RF433Accessory.prototype.callCmdViaServer = function(powerState, callback) {
         callback(error, true);
       } else {
         if(error) {
-          this.log("Something went wrong: " + error);
+            __log("Something went wrong: " + error);
         }
 
         callback(null, true);
